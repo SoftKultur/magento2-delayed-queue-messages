@@ -1,6 +1,5 @@
 {
     "name": "softkultur/module-delayed-queue-messages",
-    "version": "1.0.0",
     "description": "Allows publishing queue messages with a delay",
     "type": "magento2-module",
     "require": {
@@ -16,7 +15,7 @@
         "bitexpert/phpstan-magento": "^0.32.0"
     },
     "license": [
-        "Proprietary"
+        "MIT"
     ],
     "autoload": {
         "files": [
