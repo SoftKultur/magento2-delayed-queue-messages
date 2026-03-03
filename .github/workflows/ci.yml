@@ -44,7 +44,7 @@ jobs:
       - name: PHPUnit
         run: composer phpunit
   smoke:
-    name: Magento ${{ matrix.magento }} (DI compile)
+    name: Magento ${{ matrix.magento }} + PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     strategy:
