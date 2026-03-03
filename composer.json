@@ -10,13 +10,11 @@
     },
     "require-dev": {
         "phpstan/phpstan": "^1.9",
-        "phpunit/phpunit": ">9",
+        "phpunit/phpunit": "^9.6 || ^10.5 || ^11.0",
         "magento/magento-coding-standard": "*",
         "bitexpert/phpstan-magento": "^0.32.0"
     },
-    "license": [
-        "MIT"
-    ],
+    "license": "MIT",
     "autoload": {
         "files": [
             "registration.php"
