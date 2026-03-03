@@ -1,0 +1,10 @@
+services:
+  php_cli:
+    build:
+      context: ./
+    volumes:
+      - '../:/var/www/html:delegated'
+    restart: unless-stopped
+    command:
+      - "php-fpm"
+      - "--nodaemonize"

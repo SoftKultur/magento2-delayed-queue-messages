@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="softkultur_delayed_queue_message" resource="default" engine="innodb" comment="Delayed Queue Messages">
+        <column xsi:type="bigint" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" name="topic_name" nullable="true" length="255" comment="Message topic"/>
+        <column xsi:type="longtext" name="payload" nullable="false" comment="Message payload"/>
+        <column xsi:type="datetime" name="available_at" nullable="false"
+                comment="Date when the message becomes available"/>
+        <column xsi:type="int" padding="7" name="delay" nullable="false" comment="Delay seconds"/>
+        <column xsi:type="boolean" name="published" nullable="false" comment="Flag if the message has been published"/>
+
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" comment="Updated At Column"
+                default="CURRENT_TIMESTAMP"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+
+        <index referenceId="softkultur_delayed_queue_message_published_idx" indexType="btree">
+            <column name="published"/>
+        </index>
+    </table>
+</schema>

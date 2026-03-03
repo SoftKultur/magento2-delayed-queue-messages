@@ -1,0 +1,6 @@
+.idea
+vendor
+auth.json
+composer.lock
+reports
+var

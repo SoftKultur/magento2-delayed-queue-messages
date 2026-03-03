@@ -1,0 +1,62 @@
+name: Magento Smoke
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+concurrency:
+  group: magento-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    name: Magento ${{ matrix.magento }} (DI compile)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - magento: "2.4.6-p13"
+            php: "8.1"
+          - magento: "2.4.7-p8"
+            php: "8.2"
+          - magento: "2.4.8-p3"
+            php: "8.3"
+          - magento: "2.4.8-p3"
+            php: "8.4"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
+          extensions: mbstring, intl, bcmath, curl, dom, gd, iconv, json, libxml, openssl, simplexml, soap, xsl, zip
+          coverage: none
+
+      - name: Configure Composer auth (repo.magento.com)
+        run: |
+          mkdir -p ~/.composer
+          echo '${{ secrets.COMPOSER_AUTH }}' > ~/.composer/auth.json
+
+      - name: Create Magento project
+        run: |
+          composer create-project --no-interaction --prefer-dist \
+            magento/project-community-edition=${{ matrix.magento }} magento
+
+      - name: Install module as path repository
+        run: |
+          cd magento
+          composer config repositories.module path ../
+          composer require softkultur/module-delayed-queue-messages:"*" --no-interaction
+
+      - name: Enable module + DI compile
+        run: |
+          cd magento
+          php bin/magento module:enable SoftKultur_DelayedQueueMessages
+          php bin/magento setup:di:compile

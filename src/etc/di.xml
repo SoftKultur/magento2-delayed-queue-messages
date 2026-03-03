@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="SoftKultur\DelayedQueueMessages\Api\Data\DelayedMessageInterface"
+                type="SoftKultur\DelayedQueueMessages\Model\DelayedMessage"/>
+    <preference for="SoftKultur\DelayedQueueMessages\Api\DelayedMessageRepositoryInterface"
+                type="SoftKultur\DelayedQueueMessages\Repository\DelayedMessageRepository"/>
+
+    <type name="Magento\Framework\MessageQueue\PublisherInterface">
+        <plugin name="delay_queue_message" type="SoftKultur\DelayedQueueMessages\Plugin\DelayQueueMessage"/>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="softkultur_delayedqueuemessages_publish_delayed_messages_command" xsi:type="object">
+                    SoftKultur\DelayedQueueMessages\Console\Command\PublishDelayedMessagesCommand
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>
