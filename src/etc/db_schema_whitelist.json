@@ -1,0 +1,20 @@
+{
+  "softkultur_delayed_queue_message": {
+    "column": {
+      "entity_id": true,
+      "topic_name": true,
+      "payload": true,
+      "available_at": true,
+      "delay": true,
+      "published": true,
+      "created_at": true,
+      "updated_at": true
+    },
+    "index": {
+      "softkultur_delayed_queue_message_published_idx": true
+    },
+    "constraint": {
+      "PRIMARY": true
+    }
+  }
+}
