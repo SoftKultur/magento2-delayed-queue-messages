@@ -4,3 +4,4 @@ auth.json
 composer.lock
 reports
 var
+.phpunit.result.cache

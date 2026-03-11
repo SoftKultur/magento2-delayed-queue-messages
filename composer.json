@@ -1,5 +1,5 @@
 {
-    "name": "softkultur/module-delayed-queue-messages",
+    "name": "softkultur/magento2-delayed-queue-messages",
     "description": "Allows publishing queue messages with a delay",
     "type": "magento2-module",
     "require": {
