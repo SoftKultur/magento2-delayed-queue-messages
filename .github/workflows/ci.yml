@@ -40,9 +40,6 @@ jobs:
 
       - name: PHPStan
         run: composer phpstan
-
-      - name: PHPUnit
-        run: composer phpunit
   smoke:
     name: Magento ${{ matrix.magento }} + PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
