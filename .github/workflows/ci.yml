@@ -80,7 +80,7 @@ jobs:
         run: |
           cd magento
           composer config repositories.module path ../
-          composer require softkultur/module-delayed-queue-messages:"*@dev" --no-interaction
+          composer require softkultur/magento2-delayed-queue-messages:"*@dev" --no-interaction
 
       - name: Enable module + DI compile
         run: |
